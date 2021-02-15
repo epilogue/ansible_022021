@@ -1,2 +1,3 @@
 # Lancement du premier playbook
 $ ansible-playbook -i hosts -u vagrant premier_playbook.yaml
+$ ansible-playbook -i hosts -u vagrant premier_playbook.yaml --limit srv01
