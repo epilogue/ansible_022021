@@ -1,0 +1,19 @@
+---
+- name: "PLAY 1 - demo utilisation playbook"
+  # Target/Pattern  à qui s'adresse le PLAY
+  hosts: all
+  become: true
+
+  # Déclaration du blcok tasks : appel des modules ansible
+  tasks:
+    - name: "Ajout de l'utilisateur de deploiement via ansible"
+      ansible.builtin.user:
+        name: deploy
+        state: present
+        shell: /bin/bash
+    
+    - name: "Dépose de la clé publique du ansible mgmt chez le user deploy"
+      ansible.posix.authorized_key:
+        user: deploy
+        state: present
+        key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
