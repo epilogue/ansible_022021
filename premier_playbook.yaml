@@ -4,7 +4,7 @@
   hosts: all
   become: true
 
-  # Déclaration du blcok tasks : appel des modules ansible
+  # Déclaration du block tasks : appel des modules ansible
   tasks:
     - name: "Ajout de l'utilisateur de deploiement via ansible"
       ansible.builtin.user:
@@ -17,3 +17,11 @@
         user: deploy
         state: present
         key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
+
+    - name: "Deploiement du fichier de regle sudo pour le user deploy"
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/deploy
+        content: "deploy ALL=(ALL) NOPASSWD:ALL"
+        mode: 0440
+        owner: root
+        group: root
