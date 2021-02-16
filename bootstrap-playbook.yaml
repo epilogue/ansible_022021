@@ -5,8 +5,12 @@
 
   vars:
     liste_users:
-      - testuser1
-      - testuser2
+      testuser1:
+        state: present
+        shell: /bin/bash
+      testuser2:
+        state: present
+        shell: /sbin/nologin
 
   tasks:
     - name: Creation d'un user standard avec groupe sudo,wheel
@@ -17,13 +21,14 @@
         groups: "{{ sudogrp }}"
 
     - name: Creation d'utilisateurs standards
-      ansible.builtin.user :
-        name: "{{ item }}"
-        state: present
-        shell: /bin/bash
+      ansible.builtin.user:
+        name: "{{ item.key }}"
+        state: "{{ item.value.state }}"
+        shell: "{{ item.value.shell }}"
         password: "{{ lookup('password', 'credentials'
           + '/' + inventory_hostname + '/' 
-          + item 
+          + item.key 
           + '.password length=15') | password_hash('sha512') }}"
         update_password: on_create
-      loop: "{{ liste_users }}"
+      loop: "{{ liste_users | dict2items }}"
+
