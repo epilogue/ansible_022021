@@ -22,7 +22,7 @@
         state: present
         shell: /bin/bash
         password: "{{ lookup('password', 'credentials'
-          + '/' 
+          + '/' + inventory_hostname + '/' 
           + item 
           + '.password length=15') | password_hash('sha512') }}"
       loop: "{{ liste_users }}"
