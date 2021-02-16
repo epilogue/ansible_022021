@@ -11,7 +11,22 @@
     - name: Vérification interpreteur python
       raw: 'bash -c "test -f /usr/bin/python3"'
       ignore_errors: true
+      # Enregistrement de l'output du module dans une variable
+      register: test_python3_output
 
+    - name: Analyse de la donnée test_python3_output
+      ansible.builtin.debug:
+        #msg: "{{ test_python3_output }}"
+        var: test_python3_output
+        verbosity: 2
+
+      #Tente une install python3 QUAND le code retour de test_python3_output n'est pas à 0
+      #Conditionals
+    - name: tentative d'installation python3
+      raw: 'bash -c "(apt-get update && apt install -y python3) || (yum install -y python3)"'
+      when: test_python3_output.rc != 0
+
+    # Tasks communes une fois que le prérequis pythonest satisfait
     - name: Creation d'un user standard avec groupe sudo,wheel
       ansible.builtin.user:
         name: formation
