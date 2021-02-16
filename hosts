@@ -7,3 +7,9 @@ srv01  ansible_ssh_host=172.28.128.8
 
 [centos]
 srv02  ansible_ssh_host=172.28.128.9
+
+[debian:vars]
+sudogrp=sudo
+
+[centos:vars]
+sudogrp=wheel
