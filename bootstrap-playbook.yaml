@@ -3,6 +3,11 @@
   hosts: all
   become: true
 
+  vars:
+    liste_users:
+      - testuser1
+      - testuser2
+
   tasks:
     - name: Creation d'un user standard avec groupe sudo,wheel
       ansible.builtin.user:
@@ -16,6 +21,4 @@
         name: "{{ item }}"
         state: present
         shell: /bin/bash
-      loop:
-        - testuser1
-        - testuser2
+      loop: "{{ liste_users }}"
