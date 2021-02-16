@@ -21,4 +21,8 @@
         name: "{{ item }}"
         state: present
         shell: /bin/bash
+        password: "{{ lookup('password', 'credentials'
+          + '/' 
+          + item 
+          + '.password length=15') | password_hash('sha512') }}"
       loop: "{{ liste_users }}"
