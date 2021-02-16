@@ -49,3 +49,5 @@ https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html
 1°) Définition du mot de passe directement en variable et hash à l'appel du module user
 2°) Génération d'un mot de passe hashé puis utilisation dans une variable
 $ ansible -i hosts srv01 -m debug -a "msg={{ 'deploy123' | password_hash('sha512', 'password') }}"
+3°) interactive prompt
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_prompts.html

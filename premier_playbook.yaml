@@ -4,8 +4,12 @@
   hosts: all
   become: true
 
-  vars:
-    deploy_pwd: $6$password$QSrnnf58znEKU41eJcN9cgKLOp4gkp5XXR6.j1hiiS9mHH2JhLIkZVNYjSkbYypqVVZR1nlgzeDCTuFzMmpMo0
+  #vars:
+  #  deploy_pwd: $6$password$QSrnnf58znEKU41eJcN9cgKLOp4gkp5XXR6.j1hiiS9mHH2JhLIkZVNYjSkbYypqVVZR1nlgzeDCTuFzMmpMo0
+  vars_prompt:
+    - name: password
+      prompt: What is deploy password?
+      encrypt: sha512_crypt
 
   # Déclaration du block tasks : appel des modules ansible
   tasks:
@@ -14,7 +18,7 @@
         name: deploy
         state: present
         shell: /bin/bash
-        password: "{{ deploy_pwd }}"
+        password: "{{ password }}"
     
     - name: "Dépose de la clé publique du ansible mgmt chez le user deploy"
       ansible.posix.authorized_key:
