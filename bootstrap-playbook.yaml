@@ -28,11 +28,11 @@
       ansible.builtin.user:
         name: "{{ item.key }}"
         state: "{{ item.value.state | default('absent') }}"
-        shell: "{{ item.value.shell | default('/bin/bash')}}"
+        shell: "{{ item.value.shell | default('/bin/bash') }}"
         comment: "{{ item.value.comment | default(omit) }}"
         password: "{{ lookup('password', 'credentials'
-          + '/' + inventory_hostname + '/' 
-          + item.key 
+          + '/' + inventory_hostname + '/'
+          + item.key
           + '.password length=15') | password_hash('sha512') }}"
         update_password: on_create
       loop: "{{ liste_users | dict2items }}"

@@ -36,5 +36,3 @@
              "Société : {{ item.1.societe }}"
       loop: "{{ formation_ansible|subelements('membres') }}"
       when: item.0.status == 'stagiaire'
-
-    
