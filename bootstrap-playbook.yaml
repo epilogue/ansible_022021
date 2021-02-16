@@ -1,0 +1,12 @@
+---
+- name: PLAY BOOTSTRAP
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Creation d'un user standard avec groupe
+      user:
+        name: formation
+        state: present
+        shell: /bin/bash
+        groups: sudo

@@ -10,4 +10,8 @@ $ ansible-playbook premier_playbook.yaml --list-tasks
 $ ansible-playbook premier_playbook.yaml --limit srv01
 
 # Installation du linter ansible dans le virtualenv
-pip install ansible-lint
+pip install ansible-
+
+# Gestion de l'inventaire
+$ ansible-inventory -i hosts --list -y
+$ ansible-inventory -i hosts --graph
