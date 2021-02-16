@@ -5,18 +5,6 @@
 
   vars_files:
     - vars-bootstrap-playbook.yaml
-  #vars:
-  #  liste_users:
-  #    testuser1:
-  #      state: present
-  #      shell: /bin/bash
-  #      comment: "User test 1"
-  #    testuser2:
-  #      state: present
-  #      shell: /sbin/nologin
-  #    pierre:
-  #      state: present
-  #    gege:
 
   tasks:
     - name: Creation d'un user standard avec groupe sudo,wheel
