@@ -56,3 +56,9 @@ https://docs.ansible.com/ansible/latest/user_guide/vault.html
 https://docs.ansible.com/ansible/2.7/plugins/lookup/hashi_vault.html
 
 $ ansible-vault encrypt_string -n deploy_pwd "deploy123"
+
+$ ansible-vault decrypt vars-bootstrap.yaml
+
+$ ansible-vault encrypt vars-bootstrap.yaml
+
+$ ansible-vault edit vars-bootstrap.yaml
