@@ -39,3 +39,8 @@ Un task automatique au lancement d'un playbool : TASK [Gathering Facts]
 Un module : setup
 $ ansible -m ansible.builtin.setup srv01
 $ ansible -m ansible.builtin.setup srv01 -a "filter=*user*"
+
+
+# Conditionnals :
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html
