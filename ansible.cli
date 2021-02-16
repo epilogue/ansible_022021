@@ -26,3 +26,7 @@ https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html
 
 # Variables spéciales :
 https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html
+
+
+# Module debug et verbosity
+$ ansible-playbook demo_loop-playbook.yaml -vv
