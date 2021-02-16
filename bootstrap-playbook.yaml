@@ -4,9 +4,18 @@
   become: true
 
   tasks:
-    - name: Creation d'un user standard avec groupe
-      user:
+    - name: Creation d'un user standard avec groupe sudo,wheel
+      ansible.builtin.user:
         name: formation
         state: present
         shell: /bin/bash
         groups: "{{ sudogrp }}"
+
+    - name: Creation d'utilisateurs standards
+      ansible.builtin.user :
+        name: "{{ item }}"
+        state: present
+        shell: /bin/bash
+      loop:
+        - testuser1
+        - testuser2

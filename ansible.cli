@@ -18,3 +18,7 @@ $ ansible-inventory -i hosts --graph
 
 # Lancement du second playbook bootstrap
 $ ansible-playbook bootstrap-playbook.yaml
+
+
+# Boucle - loops
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html
