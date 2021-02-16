@@ -32,3 +32,10 @@ https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.h
 
 # Module debug et verbosity
 $ ansible-playbook demo_loop-playbook.yaml -vv
+
+# Les facts
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html
+Un task automatique au lancement d'un playbool : TASK [Gathering Facts] 
+Un module : setup
+$ ansible -m ansible.builtin.setup srv01
+$ ansible -m ansible.builtin.setup srv01 -a "filter=*user*"
