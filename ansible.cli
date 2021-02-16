@@ -51,3 +51,8 @@ https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html
 $ ansible -i hosts srv01 -m debug -a "msg={{ 'deploy123' | password_hash('sha512', 'password') }}"
 3°) interactive prompt
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_prompts.html
+4°) Vault
+https://docs.ansible.com/ansible/latest/user_guide/vault.html
+https://docs.ansible.com/ansible/2.7/plugins/lookup/hashi_vault.html
+
+$ ansible-vault encrypt_string -n deploy_pwd "deploy123"
