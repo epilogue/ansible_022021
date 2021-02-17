@@ -9,7 +9,7 @@
 - S'assurer que openssh server soit bien installé
   - Une task par type de distri : (conditionnals when )
     - module apt (openssh-server)
-    - module yum
+    - module yum (openssh-server)
 
 - Modifier la configuration du serveur openssh (/etc/ssh/sshd_config): (module lineinfile) => loop pour 3 modif
     - Activer le LogLevel
