@@ -47,3 +47,30 @@
         update_password: on_create
       loop: "{{ liste_users | dict2items }}"
 
+    - name: Installation du serveur openssh (RedHat)
+      yum:
+        name: "{{ ssh_package_list }}"
+        state: present
+      when: ansible_os_family == 'RedHat'
+
+    - name:  Installation du serveur openssh (Debian)
+      apt:
+        name: "{{ ssh_package_list }}"
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Mise a jour de la configuration du serveur ssh
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+        validate: 'sshd -t -f %s'
+      loop: "{{ regles_ssh }}"
+      notify: reload ssh
+  
+  handlers:
+    - name: reload ssh
+      ansible.builtin.service:
+        name: sshd
+        state: reloaded

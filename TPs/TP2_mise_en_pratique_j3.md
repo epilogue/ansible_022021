@@ -13,8 +13,8 @@
 
 - Modifier la configuration du serveur openssh (/etc/ssh/sshd_config): (module lineinfile) => loop pour 3 modif
     - Activer le LogLevel
-    - Commenter la ligne X11Forwarding yes
-    - une autre 
+    - Desactiver le X11Forwarding
+    > ATTENTION en cas de mauvaise syntaxe : penser au paramètre validate et backup
 
 - SI modification du fichier sshd_config => reload du service sshd
 
