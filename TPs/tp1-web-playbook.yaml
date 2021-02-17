@@ -41,7 +41,6 @@
     - name: Desactivation du virtualHost par defaut
       command: "a2dissite 000-default.conf"
 
-
     - name: Activation du virtualHost pour appli
       command: "a2ensite {{ mon_appli }}.conf"
 
