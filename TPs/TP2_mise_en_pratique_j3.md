@@ -17,3 +17,14 @@
     - une autre 
 
 - SI modification du fichier sshd_config => reload du service ssh
+
+
+### Tester le playbook :
+
+- ansible-lint
+- ansible-playbook --syntax-check
+- ansible-playbook --check --diff
+
+### Declenchement reel du playbook :
+
+- ansible-playbook
