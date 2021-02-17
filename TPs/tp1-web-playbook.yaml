@@ -31,12 +31,13 @@
         mode: 0755
 
     - name: Deploiement du virtualHost
-      ansible.builtin.template:
+      template:
         src: template/mon_appli.conf.j2
-        dest: /etc/apache2/sites-available/{{ mon_appli }}.conf
+        dest: "/etc/apache2/sites-available/{{ mon_appli }}.conf"
         owner: root
         group: root
         mode: 0644
+        validate: /usr/sbin/apachectl -t -f %s
       notify:
         - Reload apache2
 
