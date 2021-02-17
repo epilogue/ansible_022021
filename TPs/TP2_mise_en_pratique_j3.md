@@ -8,7 +8,7 @@
 
 - S'assurer que openssh server soit bien installé
   - Une task par type de distri : (conditionnals when )
-    - module apt
+    - module apt (openssh-server)
     - module yum
 
 - Modifier la configuration du serveur openssh (/etc/ssh/sshd_config): (module lineinfile) => loop pour 3 modif
@@ -16,7 +16,7 @@
     - Commenter la ligne X11Forwarding yes
     - une autre 
 
-- SI modification du fichier sshd_config => reload du service ssh
+- SI modification du fichier sshd_config => reload du service sshd
 
 
 ### Tester le playbook :
