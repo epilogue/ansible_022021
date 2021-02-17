@@ -7,17 +7,27 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Site deploye par ansible - formation</h1>
+    {#   Utilisation de variables magics ! #}
+    <h1> Site deploye par ansible {{ ansible_version.full }} - formation</h1>
+    <h2> Ansible manager : {{ ansible_host }}
+    <h2> Serveur de l'inventaire : {{ inventory_hostname }}
+    # Texte commentaire
+    {# Commentaire #}
     <h2> Gateway: {{ ansible_facts.default_ipv4.gateway }} </h2>
 
-         Utilisation de variables magics !
-         Afficher le nom du playbook
+        {# Parcourir une variable sous forme de liste #}
+        {% for i in ansible_facts.interfaces %}
+          {% if i != 'lo' %}
+        Interface : {{ i }} => @IP : {{ ansible_facts[i].ipv4.address }}<br/>
+          {% endif %}
+        {% endfor %}
 
-        Boucle: code jinja {% for %}
-         Interface (eth)  : IP
+
 
          Condition :
-          Afficher la taille de la mémoire que si elle est supérieur à  
+          Afficher la taille de la mémoire que si elle est supérieur à
+
+          Afficher OK si la distribution est debian buster
 
           Concatenation : 
           +
