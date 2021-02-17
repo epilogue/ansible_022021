@@ -11,9 +11,10 @@
     - module apt (openssh-server)
     - module yum (openssh-server)
 
-- Modifier la configuration du serveur openssh (/etc/ssh/sshd_config): (module lineinfile) => loop pour 3 modif
+- Modifier la configuration du serveur openssh (/etc/ssh/sshd_config): (module lineinfile) => loop pour 2 modif
     - Activer le LogLevel
     - Desactiver le X11Forwarding
+
     > ATTENTION en cas de mauvaise syntaxe : penser au paramètre validate et backup
 
 - SI modification du fichier sshd_config => reload du service sshd
