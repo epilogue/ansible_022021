@@ -51,14 +51,21 @@
       args:
         creates: /var/www/{{ mon_appli }}/deploy_ok
 
-    - name: Copie d'un fichier static dans le site
-      ansible.builtin.copy :
+    #- name: Copie d'un fichier static dans le site
+    #  ansible.builtin.copy :
+    #    dest: "/var/www/{{ mon_appli }}/index.html"
+    #    src: index.html
+    #    owner: root
+    #    group: root
+    #    mode: '0644'
+    #  when: appli_enable == 'present'
+    - name: Deploiement d'un template index.html
+      template:
+        src: template/index.html.j2
         dest: "/var/www/{{ mon_appli }}/index.html"
-        src: index.html
         owner: root
         group: root
-        mode: '0644'
-      when: appli_enable == 'present'
+        mode: 0644
 
     - name: Generation d'un fichier flag de fin de deploiement
       ansible.builtin.copy:
