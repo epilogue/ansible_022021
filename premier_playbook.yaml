@@ -4,24 +4,21 @@
   hosts: all
   become: true
 
-  
   vars:
-    #1 - deploy_pwd: deploy123
-    #deploy_pwd: $6$password$QSrnnf58znEKU41eJcN9cgKLOp4gkp5XXR6.j1hiiS9mHH2JhLIkZVNYjSkbYypqVVZR1nlgzeDCTuFzMmpMo0
+    #deploy_pwd: deploy123
     deploy_pwd: !vault |
           $ANSIBLE_VAULT;1.1;AES256
-          32356236323934346136333536343936386634636536663565346234353838363961306237306436
-          3030323439353930383538393531346365613831343733650a656265623736656364663134643261
-          39326431623861613831393530636365386139643037666434353534333865363232616634653936
-          3633343663393837340a623234656631373630303462643930656630623938373538393031623434
-          39613262383836343435653365383664393134316264346535623537656332393638663639626566
-          62386139333438376133366637663639376332373465643030383133303238353362653862373861
-          373432636135323038363261333936626365
+          34303762623437613164666464346662633766666134333431383438303138653338323665363734
+          3663343630376639313934346238626430626562643433300a633835336131633266363661363430
+          36333061653432323566376665666533666663623931363763316130663465306238376163623761
+          3135626166303762340a303232626231333762343834333537343539313461313163336332653030
+          6536
+    #deploy_pwd: $6$password$QSrnnf58znEKU41eJcN9cgKLOp4gkp5XXR6.j1hiiS9mHH2JhLIkZVNYjSkbYypqVVZR1nlgzeDCTuFzMmpMo0
+
     #vars_prompt:
   #  - name: password
   #    prompt: What is deploy password?
   #    encrypt: sha512_crypt
-
 
   # Déclaration du block tasks : appel des modules ansible
   tasks:
@@ -30,8 +27,9 @@
         name: deploy
         state: present
         shell: /bin/bash
-        # 1 - password: "{{ deploy_pwd | password_hash('sha512') }}"
-        password: "{{ deploy_pwd }}"
+        password: "{{ deploy_pwd | string | password_hash('sha512') }}"
+        #update_password: on_create
+        #password: "{{ deploy_pwd }}"
         # 3 - password: "{{ password }}"
     
     - name: "Dépose de la clé publique du ansible mgmt chez le user deploy"
