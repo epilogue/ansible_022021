@@ -10,6 +10,8 @@
       - apache2=2.4.38-3+deb10u4
       - aptitude
     appli_enable: present
+    mon_appli_port: 80
+    mon_appli: formation
 
   tasks:
     - name: Installation des package requis
@@ -20,20 +22,42 @@
         update_cache: yes
         purge: yes
 
-    - name: Vérification du service apache2
-      ansible.builtin.service:
-        name: apache2
-        enabled: yes
-        state: started
-      when: appli_enable == 'present'
+    - name: Creation de l'arborescence d'accueil du site
+      ansible.builtin.file:
+        path: "/var/www/{{ mon_appli }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Deploiement du virtualHost
+      ansible.builtin.template:
+        src: template/mon_appli.conf.j2
+        dest: /etc/apache2/sites-available/{{ mon_appli }}.conf
+        owner: root
+        group: root
+        mode: 0644
+    
+    - name: Desactivation du virtualHost par defaut
+      ansible.builtin.shell: "a2dissite 000-default.conf"
+
+    - name: Desactivation du virtualHost par defaut
+      ansible.builtin.shell: "a2ensite {{ mon_appli }}.conf"
 
     - name: Copie d'un fichier static dans le site
       ansible.builtin.copy :
-        dest: /var/www/html/index.html
+        dest: "/var/www/{{ mon_appli }}/index.html"
         src: index.html
         owner: root
         group: root
         mode: '0644'
+      when: appli_enable == 'present'
+
+    - name: Vérification du service apache2
+      ansible.builtin.service:
+        name: apache2
+        enabled: yes
+        state: restarted
       when: appli_enable == 'present'
 
     - name: Suppression du fichier index.html si appli non present
