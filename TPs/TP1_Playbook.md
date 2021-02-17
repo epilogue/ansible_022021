@@ -6,6 +6,9 @@
 
 ## Creation d'un playbook
 
+- Fichier yaml : tp1-web-playbook.yaml
+
+- Nom de play
 - Target : web
 
 - Installe les packages : (module ??)
