@@ -22,6 +22,16 @@
         update_cache: yes
         purge: yes
 
+    - name: Modification du fichier de configuration global apache2
+      ansible.builtin.lineinfile:
+        backup: yes
+        validate: /usr/sbin/apachectl -t -f %s
+        path: /etc/apache2/apache2.conf
+        regexp: '^LogLevel'
+        line: LogLevel info
+      notify:
+        - Reload apache2
+
     - name: Creation de l'arborescence d'accueil du site
       ansible.builtin.file:
         path: "/var/www/{{ mon_appli }}"
@@ -66,6 +76,7 @@
         owner: root
         group: root
         mode: 0644
+      when: appli_enable == 'present'
 
     - name: Generation d'un fichier flag de fin de deploiement
       ansible.builtin.copy:

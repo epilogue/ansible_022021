@@ -79,5 +79,6 @@ Combo : notify => handlers
 
 
 ## Template : jinja2 => python
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html
 Fichier dynamique qui contient du texte et des variables, facts et code jinja
