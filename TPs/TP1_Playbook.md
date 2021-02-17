@@ -18,4 +18,4 @@
 
 - S'assurer que le service apache2 soit activé (enable) et démarré (module ??)
 
-- Copie un fichier "static" (présent dans le projet ansible) vers /var/www/html (module ??)
+- Copie un fichier "static" index.html (présent dans le projet ansible) vers /var/www/html/index.html (module ??)
