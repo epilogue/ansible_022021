@@ -1,0 +1,43 @@
+---
+- name: PLAY Deploiement web
+  hosts: web
+  become: true
+
+  vars:
+    liste_pkg:
+      - git
+      - vim
+      - apache2=2.4.38-3+deb10u4
+      - aptitude
+    appli_enable: present
+
+  tasks:
+    - name: Installation des package requis
+      ansible.builtin.apt:
+        pkg: "{{ liste_pkg }}"
+        install_recommends: no
+        state: "{{ appli_enable }}"
+        update_cache: yes
+        purge: yes
+
+    - name: Vérification du service apache2
+      ansible.builtin.service:
+        name: apache2
+        enabled: yes
+        state: started
+      when: appli_enable == 'present'
+
+    - name: Copie d'un fichier static dans le site
+      ansible.builtin.copy :
+        dest: /var/www/html/index.html
+        src: index.html
+        owner: root
+        group: root
+        mode: '0644'
+      when: appli_enable == 'present'
+
+    - name: Suppression du fichier index.html si appli non present
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
+      when: appli_enable != 'present'

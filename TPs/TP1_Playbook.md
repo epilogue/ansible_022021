@@ -11,11 +11,11 @@
 - Nom de play
 - Target : web
 
-- Installe les packages : (module ??)
+- Tasks1 : s'assurer que les packages ci-dessous soient present : (module ??)
      - git
      - vim
      - apache2
 
-- S'assurer que le service apache2 soit activé (enable) et démarré (module ??)
+- Tasks2 : S'assurer que le service apache2 soit activé (enable) et démarré (module ??)
 
-- Copie un fichier "static" index.html (présent dans le projet ansible) vers /var/www/html/index.html (module ??)
+- Tasks3 : Copie un fichier "static" index.html (présent dans le projet ansible) vers /var/www/html/index.html (module ??)

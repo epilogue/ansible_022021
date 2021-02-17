@@ -66,3 +66,8 @@ $ ansible-vault decrypt vars-bootstrap.yaml
 $ ansible-vault encrypt vars-bootstrap.yaml
 
 $ ansible-vault edit vars-bootstrap.yaml
+
+
+## TP1 lance du playbook :
+$ ansible-playbook TPs/tp1-web-playbook.yaml
+$ ansible-playbook TPs/tp1-web-playbook.yaml -e appli_enable=absent
